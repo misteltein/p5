@@ -4,4 +4,6 @@ let sketch = function(p) {
     p.background(0);
   }
 };
-new p5(sketch, window.document.getElementById('container'));
+let node = document.createElement('div');
+new p5(sketch, node);
+window.document.getElementsByTagName('body')[0].appendChild(node);
