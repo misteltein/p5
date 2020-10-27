@@ -49,8 +49,9 @@ let sketch = function (p) {
 
     function kernel(x1, y1, x2, y2, s = 1.0) {
         const u2 = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / (s * s);
-        if (u2 >= 1.0) return 0;
-        return 1;
+        const u = Math.sqrt(u2);
+        if (u >= 1.0) return 0;
+        return 1 - u;
     }
 
     p.mousePressed = function () {
