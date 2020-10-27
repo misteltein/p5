@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <head>
-    <script src='p5.js'></script>
     <script src='jquery-3.5.1.min.js'></script>
-    <title>p5</title>
-    <script>
-        let urlHash;
-        let counter = 0;
-        while (!urlHash && counter < 10) {
-            urlHash = location.hash.split('#')[1];
-            console.log(urlHash)
-            let script = document.createElement('script')
-            script.type = 'text/javascript';
-            script.src = 'https://misteltein.github.io/p5/' + urlHash;
-            let firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(script, firstScript);
-        }
-    </script>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src='p5.js'></script>
 </head>
 <body>
+<script>
+    let urlHash;
+    while (!urlHash) {
+        urlHash = location.hash.split('#')[1];
+        const script = document.createElement('script')
+        script.type = 'text/javascript';
+        script.src = 'https://misteltein.github.io/p5/' + urlHash;
+        const firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    }
+</script>
 </body>
 </html>
