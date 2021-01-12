@@ -79,9 +79,9 @@ let sketch = function(p){
          }
       }
       draw() {
-         stroke(255);
-         strokeWeight(1);
-         circle(this.x + x0, this.y + y0, 2.0 * this.r - 1);
+         p.stroke(255);
+         p.strokeWeight(1);
+         p.circle(this.x + x0, this.y + y0, 2.0 * this.r - 1);
       }
    }
    class Rectangle {
@@ -107,18 +107,18 @@ let sketch = function(p){
          }
       }
       draw() {
-         noStroke();
-         fill(220);
+         p.noStroke();
+         p.fill(220);
          if(this.filled) {
-            fill(colors[this.c])
+            p.fill(colors[this.c])
          }
-         rect(this.x, this.y, this.s, this.s)
+         p.rect(this.x, this.y, this.s, this.s)
       }
    }
    
    //function setup() {
    p.setup = function(){
-      createCanvas(W, H);
+      p.createCanvas(W, H);
       const origin = new Particle();
       origin.x = 0.0;
       origin.y = 0.0;
@@ -126,7 +126,7 @@ let sketch = function(p){
       origin.ongoing = false;
       ps.push(origin);
       ps.push(new Particle());
-      noStroke();
+      p.noStroke();
       colors.push(color(101, 81, 147));
       colors.push(color(109, 128, 172));
       colors.push(color(252, 71, 51));
@@ -142,13 +142,13 @@ let sketch = function(p){
    //function draw() {
    p.draw = function(){
       if(ongoing) {
-         background(220);
+         p.background(220);
          rects.forEach((r) => {
             r.update();
             r.draw();
          });
          ps.forEach((p) => {
-            fill(colors[p.id % 5])
+            p.fill(colors[p.id % 5])
             p.draw();
             p.collapse();
             p.expand();
