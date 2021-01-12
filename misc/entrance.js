@@ -127,11 +127,11 @@ let sketch = function(p){
       ps.push(origin);
       ps.push(new Particle());
       p.noStroke();
-      colors.push(color(101, 81, 147));
-      colors.push(color(109, 128, 172));
-      colors.push(color(252, 71, 51));
-      colors.push(color(131, 153, 97));
-      colors.push(color(181, 98, 69));
+      colors.push(p.color(101, 81, 147));
+      colors.push(p.color(109, 128, 172));
+      colors.push(p.color(252, 71, 51));
+      colors.push(p.color(131, 153, 97));
+      colors.push(p.color(181, 98, 69));
       for(let i = 0, size = 32; i < size; ++i) {
          for(let j = 0, sjze = 18; j < sjze; ++j) {
             rects.push(new Rectangle(i * 40, j * 40, 40))
