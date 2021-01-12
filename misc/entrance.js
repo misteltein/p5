@@ -1,7 +1,7 @@
-let sketch = function (p) {
+let sketch = function(p){
    const R = 715.0;
-   const W = 800;
-   const H = 600;
+   const W = 1280;
+   const H = 640;
    const x0 = W * 0.5;
    const y0 = H * 0.5;
    const colors = [];
@@ -116,7 +116,8 @@ let sketch = function (p) {
       }
    }
    
-   function setup() {
+   //function setup() {
+   p.setup = function(){
       createCanvas(W, H);
       const origin = new Particle();
       origin.x = 0.0;
@@ -138,7 +139,8 @@ let sketch = function (p) {
       }
    }
    
-   function draw() {
+   //function draw() {
+   p.draw = function(){
       if(ongoing) {
          background(220);
          rects.forEach((r) => {
@@ -156,5 +158,6 @@ let sketch = function (p) {
          }
       }
    }
+
 }
 new p5(sketch)
