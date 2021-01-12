@@ -147,8 +147,8 @@ let sketch = function(p){
             r.update();
             r.draw();
          });
-         ps.forEach((p) => {
-            p.fill(colors[p.id % 5])
+         ps.forEach((p_) => {
+            p.fill(colors[p_.id % 5])
             p.draw();
             p.collapse();
             p.expand();
