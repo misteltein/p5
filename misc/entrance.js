@@ -137,6 +137,7 @@ let sketch = function(p){
             rects.push(new Rectangle(i * 40, j * 40, 40))
          }
       }
+      p.frameRate(30)
    }
    
    //function draw() {
