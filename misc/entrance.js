@@ -149,9 +149,9 @@ let sketch = function(p){
          });
          ps.forEach((p_) => {
             p.fill(colors[p_.id % 5])
-            p.draw();
-            p.collapse();
-            p.expand();
+            p_.draw();
+            p_.collapse();
+            p_.expand();
          });
          if(!ps[ps.length - 1].ongoing) {
             ps.push(new Particle());
