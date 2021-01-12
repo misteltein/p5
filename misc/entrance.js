@@ -1,7 +1,7 @@
 let sketch = function(p){
    const R = 715.0;
-   const W = 1280;
-   const H = 640;
+   const W = 800;
+   const H = 495;
    const x0 = W * 0.5;
    const y0 = H * 0.5;
    const colors = [];
