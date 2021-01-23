@@ -10,6 +10,7 @@ let sketch = function(p){
        p.background(p.color(100, 100, 100))
        p.circle(x, 0.5 * p.height, 100)
        x = x + 1
+       if(x>p.width){x=0}
    }
 }
 
