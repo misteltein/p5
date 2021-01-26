@@ -1,4 +1,4 @@
-let sketch = function(p){
+let s = function(p){
    p.setup = function setup() {
        p.createCanvas(256, 256 * 2)
        for (let r = 0; r < 256; ++r) {
@@ -15,4 +15,4 @@ let sketch = function(p){
        }
    }
 }
-new p5(sketch)
+new p5(s)
