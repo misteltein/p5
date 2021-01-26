@@ -1,18 +1,19 @@
-let sketch = function(p){
+let sketch=function(p){
    p.setup = function setup() {
-       p.createCanvas(256, 256 * 2)
-       for (let r = 0; r < 256; ++r) {
-           for (let g = 0; g < 256; ++g) {
-               p.stroke(p.color(r, g, 200))
-               p.point(r, g)
-           }
-       }
-       for (let g = 0; g < 256; ++g) {
-           for (let b = 0; b < 256; ++b) {
-               p.stroke(p.color(200, g, b))
-               p.point(g, b + 256)
-           }
-       }
+     p.createCanvas(256, 256)
+     p.background(p.color(180,180,180))
+     
+     p.point(0.2*p.width,0.5*p.height)
+     
+     p.strokeWeight(10)
+     p.point(0.4*p.width,0.5*p.height)
+     p.stroke(p.color(255,255,255))
+     
+     p.point(0.6*p.width,0.5*p.height)
+     
+     p.strokeWeight(20)
+     p.stroke(p.color(255,0,255))
+     p.point(0.8*p.width,0.5*p.height)
    }
 }
 new p5(sketch)
