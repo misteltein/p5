@@ -18,9 +18,7 @@
       const url = 'https://misteltein.github.io/p5/' + urlHash;
       $.getScript(url)
          .done(function(s,textStatus){
-            script.src = url;
-            const firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(script, firstScript);
+            console.log(textStatus)
          })
    </script>
 </main>
