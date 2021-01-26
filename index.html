@@ -11,6 +11,7 @@
       // Todo: このハッシュの取得のところ取得し続けるのではなく待つようにできないか？
       let urlHash = location.hash.split('#')[1]
       while (!urlHash) {
+         console.log('try')
          urlHash = location.hash.split('#')[1]
       }
 
