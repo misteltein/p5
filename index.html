@@ -5,9 +5,6 @@
 <body>
 <main>
    <script>
-      // const script = document.createElement('script')
-      // script.type = 'text/javascript'
-
       // Todo: このハッシュの取得のところ取得し続けるのではなく待つようにできないか？
       let urlHash = location.hash.split('#')[1]
       while (!urlHash) {
@@ -15,7 +12,7 @@
          urlHash = location.hash.split('#')[1]
       }
 
-      $.getScript('p5.js')
+      $.getScript('p5.min.js')
          .done(function(a,b){
             const url = 'https://misteltein.github.io/p5/' + urlHash;
             $.getScript(url)
