@@ -12,6 +12,9 @@ let sketch = function(p){
        p.circle(x + 0.1*i*p.width, (0.3+0.1*i)* p.height, 100)
      }
      x=x+1
+     if(x>width){
+         x=0
+     }
    }
 }
 new p5(sketch)
