@@ -5,19 +5,12 @@
 <body>
 <main>
    <script>
-      // Todo: このハッシュの取得のところ取得し続けるのではなく待つようにできないか？
-      let urlHash = location.hash.split('#')[1]
-      while (!urlHash) {
-         console.log('try')
-         urlHash = location.hash.split('#')[1]
-      }
-
       $.getScript('p5.min.js')
          .done(function(a,b){
-            const url = 'https://misteltein.github.io/p5/' + urlHash;
+            const url = 'https://misteltein.github.io/p5/' + location.hash.split('#')[1];
             $.getScript(url)
                .done(function(s,textStatus){
-                  console.log(textStatus)
+                  console.log(textStatus+': '+url)
                })
          })
    </script>
