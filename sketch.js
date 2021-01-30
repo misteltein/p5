@@ -1,45 +1,25 @@
 // Note: the origin is (0, 0)
-
+// Todo: Stock をまとめる機能(並進結果)
 class Stock {
     constructor() {
         this.stock = [] //array of obj
     }
 
     add(obj) {
-        this.stock.push(obj);
+        this.stock.push(obj)
     }
 
     draw(x, y, s = 1.0, theta = 0.0) {
-        const scale = s !== 1.0
-        const rotation = theta !== 0.0
-        const cosTheta = Math.cos(theta)
-        const sinTheta = Math.sin(theta)
-
-        function rot(pointX, pointY) {//r is 2d array
-            return [
-                pointX * cosTheta - pointY * sinTheta,
-                pointX * sinTheta + pointY * cosTheta
-            ]
-        }
-
+        push()
+        translate(x, y)
+        rotate(theta)
         for (const o of this.stock) {
-            const args = o.args.map(a => (scale) ?
-                s * a : a
-            )
+            const args = o.args.map(a => (scale) ? s * a : a)
             switch (o.shape) {
                 case 'circle':
-                    const point = rot(args[0], args[1])
-                    args[0] = point[0] + x
-                    args[1] = point[1] + y
                     circle(...args)
                     break
                 case 'line':
-                    const pointA = rot(args[0], args[1])
-                    const pointB = rot(args[2], args[3])
-                    args[0] = pointA[0] + x
-                    args[1] = pointA[1] + y
-                    args[2] = pointB[0] + x
-                    args[3] = pointB[1] + y
                     line(...args)
                     break
                 default:
@@ -47,6 +27,7 @@ class Stock {
                     break
             }
         }
+        pop()
     }
 }
 
@@ -65,14 +46,25 @@ function setup() {
     })
     stock.add({
         shape: 'line',
-        args: [0, 0, 10, 10]
+        args: [-30, -30, 30, 30]
     })
     noFill()
-    strokeWeight(1)
-    stock.draw(0.5 * width, 0.5 * height)
-    stock.draw(0.5 * width, 0.5 * height, -2, 0.1)
+    stroke(color(255, 255, 255))
+    strokeWeight(3)
 }
 
+let theta = 0.0
+
 function draw() {
-    // background(220);
+    background(220);
+
+    for (let i = 0; i < 3; ++i) {
+        stroke(color(0, 0, 0))
+        stock.draw(0.5 * width, 0.5 * height, 2.0, theta - PI / 3 * i)
+    }
+    for (let i = 0; i < 3; ++i) {
+        stroke(color(255, 255, 255))
+        stock.draw(0.5 * width, 0.5 * height, 1.0, theta + PI / 3 * i)
+    }
+    theta += 0.01
 }
