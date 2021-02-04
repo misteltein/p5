@@ -29,16 +29,16 @@ class Sprite {
     }
 
     copy() {
-        const res = new Sprite()
+        const rep = new Sprite()
         // Todo: stock 以外もコピーすること
         // 配列かどうか判定してforeachするのもいいかなって
-        res.shift = {}
-        res.shift.x = this.shift.x
-        res.shift.y = this.shift.y
-        res.s = this.s
-        res.theta = this.theta
-        res.stock = this.stock.slice(0, this.stock.length)
-        return res
+        rep.shift = {}
+        rep.shift.x = this.shift.x
+        rep.shift.y = this.shift.y
+        rep.s = this.s
+        rep.theta = this.theta
+        rep.stock = this.stock.slice(0, this.stock.length)
+        return rep
     }
 
     merge(otherSprite, x, y, s, theta) {
@@ -105,7 +105,6 @@ class Sprite {
         rotate(theta + this.theta)
 
         for (const o of this.stock) {
-            // console.log('o', o)
             if (!o.isSprite) {
                 const args = o.args.map(a => s * this.s * a)
                 // Note: これメタプロみたいなことして１つにまとめたいけどjsでは無理そう
@@ -124,13 +123,10 @@ class Sprite {
                         break
                 }
             } else {
-                console.log(this)
-                // Note: translate 継続中なので (0,0)が(x+shiftX,y+shiftY)になる
-                console.log('sn', s, this.s)
                 o.sprite.draw(
                     0.0, 0.0,
                     s * this.s,
-                    theta + this.theta
+                    this.theta
                 )
             }
         }
@@ -140,50 +136,41 @@ class Sprite {
     }
 }
 
-const sprite1 = new Sprite()
+const mySprite = new Sprite()
 const def = NaN
 
 function setup() {
     createCanvas(400, 400);
     background(220);
-    sprite1.add({
+    const unitSprite = new Sprite()
+    unitSprite.add({
         shape: 'circle',
         args: [-50, 0, 100]
     })
-    sprite1.add({
+    unitSprite.add({
         shape: 'circle',
         args: [50, 0, 100]
     })
-    sprite1.add({
+    unitSprite.add({
         shape: 'line',
         args: [-30, -30, 30, 30]
     })
     noFill()
+
+    for (let i = 0; i < 5; ++i) {
+        mySprite.merge(unitSprite.copy(), def, def, 1.0, TWO_PI / 5.0 * i)
+    }
+    mySprite.merge(mySprite.copy(), def, def, 2, def)
+
+
     stroke(color(255, 255, 255))
     strokeWeight(3)
-    const cp = sprite1.copy()
-    cp.s *= 2
-    console.log('original', sprite1)
-    console.log('copy', cp)
-    sprite1.merge(cp, def, def, 1.0, 1.0)
-    // sprite1.merge(sprite1.copy(), 50, NaN, 1.1, -1.0)
-    console.log('merged', sprite1)
-    sprite1.draw(0.5 * width, 0.5 * height, 1.5, def)
 }
 
-// let theta = 0.0
-//
-// function draw() {
-//     background(220);
-//
-//     for (let i = 0; i < 3; ++i) {
-//         stroke(color(0, 0, 0))
-//         sprite.draw(0.5 * width, 0.5 * height, 2.0, theta - PI / 3 * i)
-//     }
-//     for (let i = 0; i < 3; ++i) {
-//         stroke(color(255, 255, 255))
-//         sprite.draw(0.5 * width, 0.5 * height, 1.0, theta + PI / 3 * i)
-//     }
-//     // sprite.move(1, 0)
-//     theta += 0.01
-// }
+let theta = 0.0
+
+function draw() {
+    background(220);
+    mySprite.draw(0.5 * width, 0.5 * height, NaN, theta)
+    theta += 0.001
+}
