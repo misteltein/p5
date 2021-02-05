@@ -12,9 +12,9 @@ function Coordinate(a) {
 //     return s ? s : 1.0
 // }
 
-function Angle(theta) {
-    return theta ? theta : 0.0
-}
+// function Angle(theta) {
+//     return theta ? theta : 0.0
+// }
 
 class Sprite {
     constructor() {
@@ -25,7 +25,7 @@ class Sprite {
                 y: 0.0
             }
         this.scale = 1.0 // scaling factor
-        this.theta = Angle(NaN) // rotational angle expressed in radians
+        this.angle = 0.0 // rotational angle expressed in radians
     }
 
     copy() {
@@ -36,16 +36,16 @@ class Sprite {
         rep.shift.x = this.shift.x
         rep.shift.y = this.shift.y
         rep.scale = this.scale
-        rep.theta = this.theta
+        rep.angle = this.angle
         rep.stock = this.stock.slice(0, this.stock.length)
         return rep
     }
 
-    merge(otherSprite, x, y, scale, theta) {
+    merge(otherSprite, x, y, scale, angle) {
         // １つの命令として別のスプライトをストック
         otherSprite.move(x, y)
         otherSprite.addScale(scale)
-        otherSprite.addAngle(theta)
+        otherSprite.addAngle(angle)
 
         this.stock.push({
             isSprite: true,
@@ -61,12 +61,12 @@ class Sprite {
         this.scale *= scale
     }
 
-    setAngle(theta) {
-        this.theta = Angle(theta)
+    setAngle(angle) {
+        this.angle = angle
     }
 
-    addAngle(theta) {
-        this.theta += Angle(theta)
+    addAngle(angle) {
+        this.angle += angle
     }
 
     // カンバスを動かしたあとの位置にあるようなみためにする
@@ -92,17 +92,17 @@ class Sprite {
     // もしくは console.log で警告するけど使わせてやるぜくらい？
 
     // まとめて描画
-    draw(x, y, scale = 1.0, theta = 0.0) {
+    draw(x, y, scale = 1.0, angle = 0.0) {
         // here, s and theta are additional parameters for translation and rotation
         // scale = Scale(s)
-        theta = Angle(theta)
+        // theta = Angle(theta)
 
         // 既存の座標系やstroke, strokeWeight などの設定を取っておく
         push()
 
         // draw とスプライトがもつ並進・回転の指定を座標系に反映
         translate(x + this.shift.x, y + this.shift.y)
-        rotate(theta + this.theta)
+        rotate(angle + this.angle)
 
         for (const o of this.stock) {//Todo: o ってなまえやめれ
             if (!o.isSprite) {
@@ -126,7 +126,7 @@ class Sprite {
                 o.sprite.draw(
                     0.0, 0.0,
                     scale * this.scale,
-                    this.theta
+                    this.angle
                 )
             }
         }
