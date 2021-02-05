@@ -24,7 +24,6 @@ class Sprite {
     }
 
     addSprite(sprite, options = {}) {
-        console.log('options', options)
         // １つの要素として別のスプライトをストック
         const sprite_ = sprite.copy()
 
@@ -87,11 +86,11 @@ class Sprite {
         translate(x + this.shiftX, y + this.shiftY)
         rotate(this.angle + (options.angle ?? 0.0))
 
-        for (const o of this.elements) {//Todo: o ってなまえやめれ
-            if (!o.isSprite) {
-                const args = o.args.map(a => (options.scale ?? 1.0) * this.scale * a)
+        for (const element of this.elements) {//Todo: o ってなまえやめれ
+            if (!element.isSprite) {
+                const args = element.args.map(a => (options.scale ?? 1.0) * this.scale * a)
                 // Note: これメタプロみたいなことして１つにまとめたいけどjsでは無理そう
-                switch (o.shape) {
+                switch (element.shape) {
                     case 'circle':
                         circle(...args)
                         break
@@ -106,7 +105,7 @@ class Sprite {
                         break
                 }
             } else {
-                o.sprite.draw(
+                element.sprite.draw(
                     0.0, 0.0,
                     {
                         scale: (options.scale ?? 1.0) * this.scale,
@@ -121,8 +120,11 @@ class Sprite {
     }
 }
 
+//
+// ここから試し用のコード
+//
+
 const mySprite = new Sprite()
-const def = NaN
 
 function setup() {
     createCanvas(400, 400);
@@ -147,7 +149,6 @@ function setup() {
     }
     mySprite.addSprite(mySprite, {scale: 2.0, angle: 0.0})
 
-
     stroke(color(255, 255, 255))
     strokeWeight(3)
 }
@@ -156,7 +157,6 @@ let theta = 0.0
 
 function draw() {
     background(220);
-    // mySprite.draw(0.5 * width, 0.5 * height, NaN, theta)
-    mySprite.draw(0.5 * width, 0.5 * height, {angle: theta})
+    mySprite.draw(0.5 * width, 0.5 * height, {scale: 0.5, angle: theta})
     theta += 0.001
 }
