@@ -8,9 +8,9 @@ function Coordinate(a) {
     return a ? a : 0.0
 }
 
-function Scale(s) {
-    return s ? s : 1.0
-}
+// function Scale(s) {
+//     return s ? s : 1.0
+// }
 
 function Angle(theta) {
     return theta ? theta : 0.0
@@ -24,7 +24,7 @@ class Sprite {
                 x: 0.0,
                 y: 0.0
             }
-        this.s = Scale(NaN) // scaling factor
+        this.scale = 1.0 // scaling factor
         this.theta = Angle(NaN) // rotational angle expressed in radians
     }
 
@@ -35,16 +35,16 @@ class Sprite {
         rep.shift = {}
         rep.shift.x = this.shift.x
         rep.shift.y = this.shift.y
-        rep.s = this.s
+        rep.scale = this.scale
         rep.theta = this.theta
         rep.stock = this.stock.slice(0, this.stock.length)
         return rep
     }
 
-    merge(otherSprite, x, y, s, theta) {
+    merge(otherSprite, x, y, scale, theta) {
         // １つの命令として別のスプライトをストック
         otherSprite.move(x, y)
-        otherSprite.addScale(s)
+        otherSprite.addScale(scale)
         otherSprite.addAngle(theta)
 
         this.stock.push({
@@ -53,12 +53,12 @@ class Sprite {
         })
     }
 
-    setScale(s) {
-        this.s = Scale(s)
+    setScale(scale) {
+        this.scale = scale
     }
 
-    addScale(s) {
-        this.s *= Scale(s)
+    addScale(scale) {
+        this.scale *= scale
     }
 
     setAngle(theta) {
@@ -92,9 +92,9 @@ class Sprite {
     // もしくは console.log で警告するけど使わせてやるぜくらい？
 
     // まとめて描画
-    draw(x, y, s = 1.0, theta = 0.0) {
+    draw(x, y, scale = 1.0, theta = 0.0) {
         // here, s and theta are additional parameters for translation and rotation
-        s = Scale(s)
+        // scale = Scale(s)
         theta = Angle(theta)
 
         // 既存の座標系やstroke, strokeWeight などの設定を取っておく
@@ -104,9 +104,9 @@ class Sprite {
         translate(x + this.shift.x, y + this.shift.y)
         rotate(theta + this.theta)
 
-        for (const o of this.stock) {
+        for (const o of this.stock) {//Todo: o ってなまえやめれ
             if (!o.isSprite) {
-                const args = o.args.map(a => s * this.s * a)
+                const args = o.args.map(a => scale * this.scale * a)
                 // Note: これメタプロみたいなことして１つにまとめたいけどjsでは無理そう
                 switch (o.shape) {
                     case 'circle':
@@ -125,7 +125,7 @@ class Sprite {
             } else {
                 o.sprite.draw(
                     0.0, 0.0,
-                    s * this.s,
+                    scale * this.scale,
                     this.theta
                 )
             }
