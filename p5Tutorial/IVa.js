@@ -7,6 +7,7 @@ let sketch=function(p)
        if (p.key === 'w') {
            p.background(200)
        }
+       return false
    }
    
    p.setup = function() {
