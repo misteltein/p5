@@ -1,6 +1,6 @@
 let sketch=function(p)
 {
-   p.keyTyped() = function(){
+   p.keyTyped = function(){
        if (p.key === 'q') {
            p.circle(0.5 * p.width, 0.5 * p.height, 0.7 * p.width)
        }
@@ -9,7 +9,7 @@ let sketch=function(p)
        }
    }
    
-   p.setup() = function() {
+   p.setup = function() {
        p.createCanvas(300, 300)
        p.background(200)
    }
