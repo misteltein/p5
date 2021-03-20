@@ -8,19 +8,19 @@ let sketch = function(p){
    p.draw = function(){
        if (p.keyIsDown(p.LEFT_ARROW)) {
            x -= 1
-           x = max(0, x)
+           x = p.max(0, x)
        }
        if (p.keyIsDown(p.RIGHT_ARROW)) {
            x += 1
-           x = min(x, W)
+           x = p.min(x, W)
        }
        if (p.keyIsDown(p.UP_ARROW)) {
            y -= 1
-           y = max(0, y)
+           y = p.max(0, y)
        }
        if (p.keyIsDown(p.DOWN_ARROW)) {
            y += 1
-           y = min(y, H)
+           y = p.min(y, H)
        }
        p.background(200)
        p.circle(x, y, 100)
