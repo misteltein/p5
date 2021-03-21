@@ -1,4 +1,4 @@
-let sketch = function(){
+let sketch = function(p){
    const W = 300
    const H = 300
    
